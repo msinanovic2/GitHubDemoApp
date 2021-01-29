@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Services from '../Services'
 import {useHistory} from 'react-router-dom'
+import { AuthService } from '../AuthService';
 
 
 
@@ -36,14 +37,17 @@ function LoginForm(props) {
 
   const classes = useStyles();
   const [username,setUsername]  = useState("")
-  const [apiKey,setApiKey] = useState("")  
+  const [personalToken,setPersonalToken] = useState("")  
   const [loginFailed,setLoginFailed] = useState(false)
   const history = useHistory()
+  //redirect to myaccout, 
   useEffect(()=>{
+      if(AuthService.isLoggedIn())
+        history.push('/myaccount')
 
   },[])
   const handleLogin = async ()=>{
-      let loggedIn = await Services.loginGithub(username,apiKey);
+      let loggedIn = await Services.loginGithub(username,personalToken);
       if(loggedIn){
           props.setLoggedIn(true)
           history.push('/myaccount')
@@ -60,8 +64,8 @@ function LoginForm(props) {
         </Typography>
         <div className={classes.form} >
           <TextField value={username} onChange={(event)=>setUsername(event.target.value)} className={classes.formField} variant="outlined" margin="normal" required fullWidth label="Username" autoFocus/>
-          <TextField value={apiKey} onChange={(event)=>setApiKey(event.target.value)} className={classes.formField} variant="outlined" margin="normal" required fullWidth label="API Key" type="password"/>
-          <Button disabled={apiKey==="" || username===''}  fullWidth variant="contained" color="primary" className={classes.submit} onClick={handleLogin} >
+          <TextField value={personalToken} onChange={(event)=>setPersonalToken(event.target.value)} className={classes.formField} variant="outlined" margin="normal" required fullWidth label="Personal token" type="password"/>
+          <Button disabled={personalToken==="" || username===''}  fullWidth variant="contained" color="primary" className={classes.submit} onClick={handleLogin} >
             Sign In
           </Button>
          {loginFailed? <Typography color={"error"}>

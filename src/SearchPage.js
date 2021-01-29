@@ -21,6 +21,20 @@ function SearchPage(){
             setCurrentPage(repos?.items?.slice( (pageNumber-1)*10,pageNumber*10))
     },[pageNumber])
 
+    const changeFormat= (items)=>{
+        let newItems = []
+        for(let repo of items)
+            newItems.push({
+                id:repo.id,
+                name:repo.name,
+                login:repo.owner.login,
+                description:repo.description,
+                url:repo.html_url,
+                avatar:repo.owner.avatar_url,
+            })
+        return newItems
+    }
+
     const handleResponse = (newRepos) =>{
         if(!newRepos){
             setPageNumber(0)
@@ -50,6 +64,9 @@ function SearchPage(){
         setRepos(newRepos)
         setCurrentPage(newRepos?.items?.slice( (pageNumber-1)*10,pageNumber*10))
         setLoading(false)
+        const newItems = changeFormat(newRepos.items)
+        Services.saveRepos(newItems)
+        
     }
 
     const GetRepos = async (searchParam)=>{

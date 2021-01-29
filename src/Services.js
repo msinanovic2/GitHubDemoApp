@@ -1,8 +1,8 @@
-import Header from "./Header"
-
 import {AuthService} from './AuthService'
 
 const baseUrl ="https://api.github.com"
+
+const backendUrl = "https://gitdemoapiv1.herokuapp.com"
  
 
 
@@ -66,6 +66,37 @@ const Services = {
             console.log(err)
             AuthService.logout()
             return null
+        }
+    },
+    getSaved:async()=>{
+        try{
+            let data = await fetch(`${backendUrl}/api/values`)
+            if(!data.ok)
+                throw Error("Request failed")
+            data = await data.json()
+            return data
+        }catch(err){
+            console.log(err)
+            return null
+        }
+    },
+    saveRepos: async (items)=>{
+        try{
+            fetch(`${backendUrl}/api/values`,{
+                method:"POST",
+                body:JSON.stringify(
+                    items
+                ),
+                headers: {'Content-Type': 'application/json'}
+            }).then(response=>{
+                console.log(response)
+            }).catch(err=>{
+                console.log(err)
+            })
+
+        }
+        catch(err){
+            console.log(err)
         }
     }
 

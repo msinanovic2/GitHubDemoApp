@@ -33,18 +33,17 @@ const useStyle = makeStyles( (theme)=>( {
 
 function EditRepo(props) {
     const classes = useStyle()
-    const close = props.close
     const repo = props.repo
     const [username,setUsername] = useState(repo.owner.login)
     const [name,setName] = useState(repo.name)
     const [description,setDescriiption] = useState(repo.description)
     const onSubmit = (event)=>{
         props.editRepo(repo.id,name,username,description)
-        close()
+        props.close()
     }
     return (
         <Paper className={classes.root}>
-            <form autoComplete = "off"  onSubmit= {onSubmit} >
+            <div >
                 <Grid container direction={"column"} justify={"center"} alignItems={"center"} spacing={7}>
                     <Typography variant={"h5"}>
                         Edit repository
@@ -59,15 +58,15 @@ function EditRepo(props) {
                         <TextField  value = {description} label={"Description"} onChange={(event)=>setDescriiption(event.target.value)} multiline variant={"outlined"} />
                     </Grid>
                     <div className ={classes.buttonsDiv}>
-                        <Button type={"submit"} variant={"contained"} color={"primary"} disabled={name === "" || username === ""} > 
+                        <Button  variant={"contained"} color={"primary"} disabled={name === "" || username === ""} onClick = {onSubmit} > 
                             Submit
                         </Button>
-                        <Button onClick={close} variant={"outlined"} > 
+                        <Button onClick={props.close} variant={"outlined"} > 
                             Close
                         </Button>
                     </div>
                 </Grid>
-            </form>
+            </div>
          </Paper>
     )
 }

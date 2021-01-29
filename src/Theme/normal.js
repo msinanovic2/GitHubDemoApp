@@ -3,7 +3,6 @@ import green from '@material-ui/core/colors/green';
 import blue from '@material-ui/core/colors/blue'
 
 
-// A custom theme for this app
 const theme = createMuiTheme({
     palette: {
       primary: {

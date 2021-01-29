@@ -5,7 +5,7 @@ import {useContext  } from "react";
 import { CustomThemeContext } from './Theme/CustomThemeProvider'
 import { makeStyles } from '@material-ui/core/styles';
 import BrightnessMediumIcon from '@material-ui/icons/BrightnessMedium';
-import { AccountCircle, ArrowBack, Home } from '@material-ui/icons';
+import { AccountCircle, ArrowBack, Home, Save } from '@material-ui/icons';
 import {useHistory} from 'react-router-dom'
 import { AuthService } from './AuthService';
 
@@ -52,6 +52,10 @@ function Header(props) {
           <Typography color={"textPrimary"} variant="h6" className={classes.title} >
             DemoApp
           </Typography>
+          <IconButton onClick={(event)=>history.push('/saved')}>
+              <Save/>
+          </IconButton>
+          
           <IconButton onClick={(event)=>history.push('/')}>
             <Home/>
           </IconButton>
@@ -61,6 +65,7 @@ function Header(props) {
           <IconButton onClick={(event)=>setOpenMenu(true)} >
             <AccountCircle/>
           </IconButton>
+         
 
           <Menu open={openMenu} 
           anchorEl={accountButtonRef.current}

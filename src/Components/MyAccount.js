@@ -9,10 +9,14 @@ const useStyles = makeStyles((theme) => ({
     cardAccount:{
         width:"600px",
         margin:"auto"
+
     },
     link:{
         textDecoration: "none",
         color: theme.palette.text.primary
+    },
+    cardRow:{
+        marginBottom:"10px"
     }
 
 }))
@@ -22,12 +26,11 @@ const useStyles = makeStyles((theme) => ({
 function CardRow(props) {
     const label = props.label
     const value = props.value
-    return <div>
+    return <div style = {{marginBottom:"10px"}}>
                 <Typography >
                     {`${label}: ${value}`}    
                 </Typography>        
             </div>
-    
 }
 
 
@@ -78,11 +81,17 @@ function MyAccount(props) {
                         title ={user.login}
                         />
                         <CardContent>
-                            <div>
+                            <div style = {{marginBottom:"10px"}}>
+                            <Typography>
+                                
                                 Link :
+                                </Typography>
+                                <Typography >
+                                
                                 <a className={classes.link} href = {user.html_url}>
                                     {user.html_url}
                                 </a>
+                                </Typography>
                             </div>
                             <Divider/>
                             <CardRow label={'Collaborators'} value={user.collaborators}/>
@@ -91,7 +100,7 @@ function MyAccount(props) {
                             <Divider/>
                             <CardRow label={'Following'} value={user.following}/>
                             <Divider/>
-                            <CardRow label={'PubliC Repos'} value={user.public_repos}/>
+                            <CardRow label={'Public Repos'} value={user.public_repos}/>
                             <Divider/>
                             <CardRow label={'Owned Private Repos'} value={user.owned_private_repos}/>
                             <Divider/>
