@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext, useEffect, useState } from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
+import Header from './Header'
+import SearchPage from './SearchPage';
+import LoginForm from './Components/LoginForm'
+import { AuthService } from "./AuthService";
+import {ProtectedRoute} from './ProtectedRoute'
+import MyAccount from './Components/MyAccount';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+export default function App() {
+  const [loggedIn,setLoggedIn] = useState(false)
+  useEffect(()=>{
+    setLoggedIn(AuthService.isLoggedIn())
+  },[])
+
+
+  return ( 
+    <Router >
+
+      <Header loggedIn={loggedIn} setLoggedIn = {setLoggedIn}/>
+       <Switch>
+        <Route exact path ='/' component = {SearchPage}/>
+        <Route  exact path = '/login'  render={(props)=><LoginForm setLoggedIn={setLoggedIn}/>} />
+        <ProtectedRoute exact path ='/myaccount' component={MyAccount} setLoggedIn={setLoggedIn}/>
+        <Redirect to='/'/>
+      </Switch>
+    </Router>
+  )
 }
-
-export default App;
