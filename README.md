@@ -50,15 +50,15 @@ Frontend link : [https://githubdemoappfrontv1.herokuapp.com/]
 
 Search repositories by name. To edit data of repository click on the *Edit* button (under Description). Edited JSON (latest search result including changes) is saved on backend by pressing Submit button.
 
-### Route '/saved' (Save icon)
+### Route `/saved` (Save icon)
 
 Preview of saved data.
 
-### Route '/login' (Account icon)
+### Route `/login` (Account icon)
 Credentials are provided by filling the form. First field requires GitHub username, and the second field requires Personal Access Token. Personal access token can be created on [https://github.com/]. When on [https://github.com/], go to Account > Settings > Developer Settings > Personal Access Tokens. "User" scope is needed (Update all user data). If provided credentials are valid, user is redirected to `/myaccount`.
 
 
-### Route '/myaccount' (Account icon)
+### Route `/myaccount` (Account icon)
 
 Preview of user data based on provided credentials.
 
