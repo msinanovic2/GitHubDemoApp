@@ -21,12 +21,12 @@ Demo App
 #### branch:main
   1. Clone repository
   2. Install Heroku for desktop
-  3. Open CLI inside repository folder and execute 4. and 5.
+  3. Open CLI inside repository folder and execute 4. ,5. and 6.
   4. `heroku create githubdemoappfrontv1 --buildpack mars/create-react-app`
   5. `git push heroku main:main` or `git push heroku main:master`
+  6. `git remote rename heroku herokufront` (if frontend and backend are deployed from same directory)
 
 *Note: "githubdemoappfrontv1" is the name of the app and it is already taken.*
-
 
 Frontend link : [https://githubdemoappfrontv1.herokuapp.com/]
 
