@@ -2,7 +2,7 @@ import {AuthService} from './AuthService'
 
 const baseUrl ="https://api.github.com"
 
-const backendUrl = "https://gitdemoapiv1.herokuapp.com"
+const backendUrl = process.env.REACT_APP_BACKEND_URL
  
 
 
